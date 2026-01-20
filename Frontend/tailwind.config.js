@@ -12,14 +12,17 @@ export default {
       },
       colors: {
         library: {
-          bg: '#132C2B',        // Deep teal / charcoal green
-          bgDark: '#0F1F1E',    // Darker shade for contrast
-          card: '#1E3F3F',      // Lighter dark teal for cards
-          cardHover: '#2A4F4F', // Hover state
-          accent: '#F4C430',    // Warm yellow/gold
+          bg: '#10141d',        // Deep dark slate/gunmetal
+          bgDark: '#0b0f15',    // Darker shade
+          card: '#1f293a',      // Lighter slate for cards
+          cardHover: '#2a3648', // Hover state
+          accent: '#FCD34D',    // Vibrant yellow/gold
           text: '#FFFFFF',      // Primary text
-          textMuted: '#8FA3A3', // Secondary text
-          border: '#2C5555',    // Subtle borders
+          textMuted: '#9CA3AF', // Secondary text (gray-400)
+          border: '#374151',    // Subtle borders
+          success: '#10B981',   // Green for status
+          warning: '#F59E0B',   // Orange
+          danger: '#EF4444',    // Red
         }
       },
       backgroundImage: {

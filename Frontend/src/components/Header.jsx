@@ -1,42 +1,66 @@
-import React from 'react';
-import { FaSearch, FaBell } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaSearch, FaBell, FaEnvelope } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-    return (
-        <header className="sticky top-0 z-40 w-full px-8 py-6 bg-library-bg/95 backdrop-blur-sm flex items-center justify-between">
+    const [activeTab, setActiveTab] = useState('Library');
 
-            {/* Search Bar */}
-            <div className="flex-1 max-w-2xl mx-auto">
+    const tabs = ['Library', 'Books', 'Authors'];
+
+    return (
+        <header className="px-8 py-5 flex items-center justify-between bg-library-bg">
+            {/* Left Tabs */}
+            <div className="flex items-center space-x-8">
+                {tabs.map((tab) => (
+                    <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`text-lg transition-colors ${activeTab === tab
+                                ? 'text-white font-medium'
+                                : 'text-library-textMuted hover:text-white'
+                            }`}
+                    >
+                        {tab}
+                        {activeTab === tab && (
+                            <div className="h-0.5 bg-white w-4 mx-auto mt-1 rounded-full" />
+                        )}
+                    </button>
+                ))}
+            </div>
+
+            {/* Center Search */}
+            <div className="flex-1 max-w-xl mx-12">
                 <div className="relative group">
-                    <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-library-textMuted group-focus-within:text-library-accent transition-colors" />
+                    <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-white transition-colors" />
                     <input
                         type="text"
-                        placeholder="Search for books, authors, or subjects..."
-                        className="w-full bg-library-card border border-library-border rounded-full py-3 pl-12 pr-6 text-library-text placeholder-library-textMuted focus:outline-none focus:border-library-accent focus:shadow-glow transition-all duration-300"
+                        placeholder="Search here"
+                        className="w-full bg-library-card border-none rounded-2xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:ring-0 focus:bg-library-cardHover transition-all"
                     />
                 </div>
             </div>
 
-            {/* Right Side Actions */}
-            <div className="flex items-center space-x-6 ml-8">
-                {/* Notifications */}
-                <button className="relative p-2 text-library-textMuted hover:text-white transition-colors">
+            {/* Right Actions */}
+            <div className="flex items-center space-x-6">
+                <button className="text-gray-400 hover:text-white transition-colors relative">
                     <FaBell size={20} />
-                    <span className="absolute top-1 right-1 w-2 h-2 bg-library-accent rounded-full animate-pulse"></span>
+                    <span className="absolute top-0 right-0 w-2 h-2 bg-library-accent rounded-full border-2 border-library-bg"></span>
                 </button>
 
-                {/* User Profile */}
-                <div className="flex items-center space-x-3 cursor-pointer p-1 rounded-full hover:bg-library-card transition-colors pr-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-library-accent to-yellow-200 border-2 border-library-card overflow-hidden">
+                <button className="text-gray-400 hover:text-white transition-colors">
+                    <FaEnvelope size={20} />
+                </button>
+
+                <div className="flex items-center space-x-3 pl-4 border-l border-library-border ml-2">
+                    <div className="text-right hidden md:block">
+                        <p className="text-sm font-medium text-white">Abhishek Saha</p>
+                    </div>
+                    <div className="w-10 h-10 rounded-full border-2 border-library-accent overflow-hidden">
                         <img
                             src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-                            alt="User"
+                            alt="Profile"
                             className="w-full h-full object-cover"
                         />
-                    </div>
-                    <div className="hidden md:block">
-                        <p className="text-sm font-semibold text-white">Alex Morgan</p>
-                        <p className="text-xs text-library-textMuted">Premium Member</p>
                     </div>
                 </div>
             </div>

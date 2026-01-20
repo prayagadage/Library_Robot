@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaChevronRight } from 'react-icons/fa';
 
 const Section = ({ title, children, linkTo = '#' }) => {
@@ -9,13 +9,13 @@ const Section = ({ title, children, linkTo = '#' }) => {
                     {title}
                 </h2>
 
-                <a
-                    href={linkTo}
+                <Link
+                    to={linkTo}
                     className="group flex items-center gap-2 text-sm font-medium text-library-textMuted hover:text-library-accent transition-colors"
                 >
                     Show all
                     <FaChevronRight className="text-xs transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
             </div>
 
             <div className="relative -mx-2">

@@ -8,8 +8,13 @@
   body {
     @apply bg-library-bg text-library-text font-sans antialiased;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display tracking-tight;
   }
 }
@@ -21,14 +26,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #132C2B; 
+  background: #10141d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2C5555; 
+  background: #374151;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #F4C430; 
+  background: #FCD34D;
 }

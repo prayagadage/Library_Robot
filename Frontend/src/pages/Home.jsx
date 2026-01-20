@@ -1,82 +1,112 @@
 import React from 'react';
+import Layout from '../layouts/Layout';
 import BookCard from '../components/BookCard';
+import SubjectCard from '../components/SubjectCard';
 import Section from '../components/Section';
+import { dummyBooks, subjects, authors } from '../data/dummyBooks';
+import { FaStar } from 'react-icons/fa';
 
 const Home = () => {
-    // Dummy Data for Design Verification
-    const previousReading = [
-        { id: 1, title: 'Clean Architecture', author: 'Robert C. Martin', cover: 'https://m.media-amazon.com/images/I/41-sN-m8xJL.jpg', progress: 75, department: 'Software' },
-        { id: 2, title: 'The Pragmatic Programmer', author: 'Andrew Hunt', cover: 'https://m.media-amazon.com/images/I/51A8l+FxR+L.jpg', progress: 30, department: 'Computer Science' },
-    ];
+    // Filter data for sections
+    const readingNow = dummyBooks.slice(0, 5);
+    const popularBooks = dummyBooks.filter(b => b.type === 'popular');
 
-    const popularBooks = [
-        { id: 3, title: 'Introduction to Algorithms', author: 'Thomas H. Cormen', cover: 'https://m.media-amazon.com/images/I/61Pgdn8Ys-L.jpg', rating: 4.9, department: 'CS' },
-        { id: 4, title: 'Design Patterns', author: 'Erich Gamma', cover: 'https://m.media-amazon.com/images/I/81I9hM63iQL.jpg', rating: 4.8, department: 'Software' },
-        { id: 5, title: 'Structure and Interpretation', author: 'Harold Abelson', cover: 'https://m.media-amazon.com/images/I/51+17a+G+xL.jpg', rating: 4.9, department: 'CS' },
-        { id: 6, title: 'Artificial Intelligence', author: 'Stuart Russell', cover: 'https://m.media-amazon.com/images/I/81-Nq1+tXmL._AC_UF1000,1000_QL80_.jpg', rating: 4.7, department: 'AI/ML' },
-        { id: 7, title: 'Deep Learning', author: 'Ian Goodfellow', cover: 'https://m.media-amazon.com/images/I/61qba55E5kL.jpg', rating: 4.6, department: 'AI/ML' },
-    ];
-
-    const newArrivals = [
-        { id: 8, title: 'Modern Operating Systems', author: 'Andrew S. Tanenbaum', cover: 'https://m.media-amazon.com/images/I/715M-jJ9xLL.jpg', rating: 4.5, department: 'CS' },
-        { id: 9, title: 'Computer Networks', author: 'Andrew S. Tanenbaum', cover: 'https://m.media-amazon.com/images/I/51n6XbKx6LL.jpg', rating: 4.4, department: 'Networking' },
-        { id: 10, title: 'Database System Concepts', author: 'Abraham Silberschatz', cover: 'https://m.media-amazon.com/images/I/91M-Mxm+gAL.jpg', rating: 4.3, department: 'Databases' },
-    ];
-
-    return (
-        <div className="pb-10">
-            {/* Welcome Hero */}
-            <div className="mb-12">
-                <h1 className="text-4xl font-display font-bold text-white mb-2">
-                    Welcome back, <span className="text-library-accent">Alex</span>
-                </h1>
-                <p className="text-library-textMuted text-lg">
-                    Your digital library is ready. You have <span className="text-white font-semibold">2 books</span> due this week.
-                </p>
+    // Right Panel Content
+    const RightPanel = (
+        <div className="space-y-8">
+            {/* Popular Books */}
+            <div>
+                <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-white font-semibold text-lg">Popular books</h3>
+                    <button className="text-xs text-library-textMuted hover:text-white">Show all</button>
+                </div>
+                <div className="space-y-4">
+                    {popularBooks.map(book => (
+                        <div key={book.id} className="flex gap-3 group cursor-pointer hover:bg-library-card/50 p-2 rounded-lg transition-colors">
+                            <img src={book.cover} alt={book.title} className="w-12 h-16 rounded object-cover" />
+                            <div className="flex-1 min-w-0">
+                                <h4 className="text-white text-sm font-medium truncate group-hover:text-library-accent transition-colors">{book.title}</h4>
+                                <p className="text-xs text-library-textMuted mb-1">{book.author}</p>
+                                <div className="flex items-center gap-1 text-[10px] text-library-textMuted">
+                                    <span className="text-green-400">In stock</span>
+                                    <span>•</span>
+                                    <div className="flex items-center text-yellow-500">
+                                        <FaStar size={10} /> {book.rating}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
-            {/* Previous Reading Section */}
-            <Section title="Continue Reading">
-                {previousReading.map((book) => (
-                    <BookCard
-                        key={book.id}
-                        title={book.title}
-                        author={book.author}
-                        coverUrl={book.cover}
-                        department={book.department}
-                        isLarge={true}
-                    />
-                ))}
-            </Section>
-
-            {/* Popular Section */}
-            <Section title="Popular in Computer Science" linkTo="/popular">
-                {popularBooks.map((book) => (
-                    <BookCard
-                        key={book.id}
-                        title={book.title}
-                        author={book.author}
-                        coverUrl={book.cover}
-                        rating={book.rating}
-                        department={book.department}
-                    />
-                ))}
-            </Section>
-
-            {/* New Arrivals Section */}
-            <Section title="New Arrivals" linkTo="/new">
-                {newArrivals.map((book) => (
-                    <BookCard
-                        key={book.id}
-                        title={book.title}
-                        author={book.author}
-                        coverUrl={book.cover}
-                        rating={book.rating}
-                        department={book.department}
-                    />
-                ))}
-            </Section>
+            {/* Writers/Authors */}
+            <div>
+                <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-white font-semibold text-lg">Writers and Authors</h3>
+                    <button className="text-xs text-library-textMuted hover:text-white">Show all</button>
+                </div>
+                <div className="grid grid-cols-1 gap-3">
+                    {authors.map((author, index) => (
+                        <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-library-card/50 transition-colors cursor-pointer group">
+                            <img src={author.image} alt={author.name} className="w-10 h-10 rounded-full object-cover border border-library-border" />
+                            <div className="flex-1">
+                                <h4 className="text-white text-sm font-medium group-hover:text-library-accent transition-colors">{author.name}</h4>
+                                <p className="text-xs text-library-textMuted">{author.role}</p>
+                            </div>
+                            <div className="text-right">
+                                <span className="block text-white text-sm font-bold">{author.books}</span>
+                                <span className="text-[10px] text-library-textMuted">Books</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
+    );
+
+    return (
+        <Layout rightPanel={RightPanel}>
+            <div className="space-y-10 pb-10">
+                {/* Previous Reading */}
+                <section>
+                    <Section title="Previous Reading" linkTo="#">
+                        <div className="flex space-x-6 overflow-x-auto pb-4 scrollbar-hide">
+                            {readingNow.map((book) => (
+                                <BookCard
+                                    key={book.id}
+                                    {...book}
+                                />
+                            ))}
+                        </div>
+                    </Section>
+                </section>
+
+                {/* Subjects Section */}
+                <section>
+                    <h2 className="text-2xl font-display font-semibold text-white mb-6">Subjects section</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {subjects.map((subject, index) => (
+                            <SubjectCard key={index} {...subject} />
+                        ))}
+                    </div>
+                </section>
+
+                {/* New Books */}
+                <section>
+                    <Section title="New books" linkTo="#">
+                        <div className="flex space-x-6 overflow-x-auto pb-4 scrollbar-hide">
+                            {readingNow.reverse().map((book) => (
+                                <BookCard
+                                    key={`new-${book.id}`}
+                                    {...book}
+                                />
+                            ))}
+                        </div>
+                    </Section>
+                </section>
+            </div>
+        </Layout>
     );
 };
 
