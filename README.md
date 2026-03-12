@@ -145,12 +145,3 @@ GitHub: [github.com/prayagadage](https://github.com/prayagadage)
 
 ---
 ```
-
-This version:
-
-- Leads with a strong, imaginative hook in the introduction
-- Clearly states it's a **hardware + software** combination
-- Positions the project as forward-looking and impressive for portfolios
-- Keeps the structure clean and scannable
-
-Let me know if you'd like to add badges, a demo video section, screenshots placeholders, or make it even more technical/academic in tone!
